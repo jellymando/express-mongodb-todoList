@@ -6,7 +6,7 @@ module.exports = function(app)
         res.render('index.html');
      });
 
-      app.post('/create', (req, res) => {
+      app.post('/items', (req, res) => {
          const item = new Item(req.body);
          item.save((err, doc) => {
             if(err) return res.json({success: false, err});
@@ -14,11 +14,10 @@ module.exports = function(app)
          });
       });
       
-      app.get('/find', (req, res) => {
+      app.get('/items', (req, res) => {
          Item.find((err, data) => {
             if(err) return res.status(500).send({error: 'database failure'});
             res.json(data);
          })
       });
- 
 }
