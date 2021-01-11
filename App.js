@@ -1,15 +1,15 @@
 import CreateInput from "/components/CreateInput.js";
-import ItemList from "/components/ItemList.js";
+import SearchInput from "/components/SearchInput.js";
 
 export default class App {
     $root = null;
+    $items = {}
 
-    constructor($root) {
+    constructor($root, $items) {
         this.$root = $root;
-        this.items = [];
 
-        this.createInput = new CreateInput($root);
-        this.itemList = new ItemList($root, this.items);
+        this.createInput = new CreateInput($root, $items);
+        this.searchInput = new SearchInput($root, $items);
     }
     
 }

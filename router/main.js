@@ -20,4 +20,11 @@ module.exports = function(app)
             res.json(data);
          })
       });
+
+      app.post('/search', (req, res) => {
+         Item.find({title: req.body.title}, (err, data) => {
+            if(err) return res.status(500).send({error: 'database failure'});
+            res.json(data);
+         })
+      });
 }
