@@ -1,19 +1,7 @@
 export default class ItemList {
-    constructor($root, $items) {
-        this.items = $items;
-
-        this.find = async () => {
-            try {
-                const response = await axios.get('/find');
-                this.items = response.data;
-                console.log(this.items);
-                this.render(this.items);
-            } catch (e) {
-                console.log(e);
-            }
-        };
-
-        this.find();
+    constructor({$root, items, find}) {
+        this.items = items;
+        this.find = find;
         
         const $itemListWrap = document.createElement("div");
         $itemListWrap.id = "itemListWrap";
@@ -21,14 +9,20 @@ export default class ItemList {
 
         $root.appendChild($itemListWrap);
 
-        this.render(this.items);
+        this.find();
+        this.render();
     }
 
-    render(items) {
+    setState(data) {
+        this.items = data;
+        this.render();
+    }
+
+    render() {
         console.log("render..");
-        if(items) {
-            if(items.length > 0) {
-                this.$itemListWrap.innerHTML = `<ul id="itemList">` + items.map(item => `
+        if(this.items) {
+            if(this.items.length > 0) {
+                this.$itemListWrap.innerHTML = `<ul id="itemList">` + this.items.map(item => `
                     <li>
                         ${item.title}
                     </li>
