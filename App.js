@@ -12,13 +12,12 @@ export default class App {
         this.createInput = new CreateInput({
             $root,
             items,
-            create: async () => {
+            create: async (title) => {
                 try {
-                    await axios.post('/create', {
-                        "title": $createInput.value
+                    const response = await axios.post('/create', {
+                        "title": title
                     });
-                    items = response.data;
-                    this.itemList.setState(response.data);
+                    this.itemList.find();
                 } catch (e) {
                     console.log(e);
                 }
@@ -28,10 +27,10 @@ export default class App {
         this.searchInput = new SearchInput({
             $root,
             items,
-            search: async () => {
+            search: async (title) => {
                 try {
                     const response = await axios.post('/search', {
-                        "title": $searchInput.value
+                        "title": title
                     });
                     items = response.data;
                     this.itemList.setState(response.data);
@@ -47,7 +46,6 @@ export default class App {
             find: async () => {
                 try {
                     const response = await axios.get('/find');
-                    this.items = response.data;
                     this.itemList.setState(response.data);
                 } catch (e) {
                     console.log(e);

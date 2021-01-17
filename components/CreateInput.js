@@ -12,7 +12,8 @@ export default class CreateInput {
         $root.appendChild($createInput);
         $root.appendChild($createButton);
         $createInput.focus();
-        $createButton.addEventListener("click", this.create);
+
+        $createButton.addEventListener("click", () => this.create($createInput.value));
     }
     render() {
         $createInput.value = "";

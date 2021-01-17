@@ -14,7 +14,7 @@ export default class SearchInput {
         $root.appendChild($searchInput);
         $root.appendChild($searchButton);
 
-        $searchButton.addEventListener("click", this.search);
+        $searchButton.addEventListener("click", () => this.search($searchInput.value));
     }
 
     render() {
