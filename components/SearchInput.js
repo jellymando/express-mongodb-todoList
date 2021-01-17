@@ -1,9 +1,9 @@
 import ItemList from "/components/ItemList.js";
 
 export default class SearchInput {
-    constructor({$root, items, search}) {
+    constructor({$root, items, onSearch}) {
         this.items = items;
-        this.search = search;
+        this.onSearch = onSearch;
 
         const $searchInput = document.createElement("input");
         $searchInput.placeholder = "검색어를 입력해보세요.";

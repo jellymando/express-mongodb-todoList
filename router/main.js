@@ -27,4 +27,11 @@ module.exports = function(app)
             res.json(data);
          })
       });
+
+      app.post('/delete', (req, res) => {
+         Item.remove({_id: req.body._id}, (err, data) => {
+            if(err) return res.status(500).send({error: 'database failure'});
+            res.json(data);
+         })
+      });
 }

@@ -1,7 +1,7 @@
 export default class CreateInput {
-    constructor({$root, items, create}) {
+    constructor({$root, items, onCreate}) {
         this.items = items;
-        this.create = create;
+        this.onCreate = onCreate;
 
         const $createInput = document.createElement("input");
         $createInput.placeholder = "할일을 추가해보세요.";
@@ -13,7 +13,7 @@ export default class CreateInput {
         $root.appendChild($createButton);
         $createInput.focus();
 
-        $createButton.addEventListener("click", () => this.create($createInput.value));
+        $createButton.addEventListener("click", () => this.onCreate($createInput.value));
     }
     render() {
         $createInput.value = "";

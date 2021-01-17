@@ -1,7 +1,8 @@
 export default class ItemList {
-    constructor({$root, items, find}) {
+    constructor({$root, items, onFind, onDelete}) {
         this.items = items;
-        this.find = find;
+        this.onFind = onFind;
+        this.onDelete = onDelete;
         
         const $itemListWrap = document.createElement("div");
         $itemListWrap.id = "itemListWrap";
@@ -9,13 +10,18 @@ export default class ItemList {
 
         $root.appendChild($itemListWrap);
 
-        this.find();
+        this.onFind();
         this.render();
     }
 
     setState(data) {
         this.items = data;
         this.render();
+
+        const $deleteButton = document.querySelectorAll("#itemList .deleteButton");
+        if($deleteButton) {
+            $deleteButton.forEach(button => button.addEventListener("click", () => this.onDelete(button.closest("li").getAttribute('key'))));
+        }
     }
 
     render() {
@@ -23,8 +29,9 @@ export default class ItemList {
         if(this.items) {
             if(this.items.length > 0) {
                 this.$itemListWrap.innerHTML = `<ul id="itemList">` + this.items.map(item => `
-                    <li>
-                        ${item.title}
+                    <li key='${item._id}'>
+                        <span>${item.title}</span>
+                        <button type="button" class="deleteButton">삭제</button>
                     </li>
                     `
                 ).join("") + "</ul>";
