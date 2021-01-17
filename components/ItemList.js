@@ -17,11 +17,6 @@ export default class ItemList {
     setState(data) {
         this.items = data;
         this.render();
-
-        const $deleteButton = document.querySelectorAll("#itemList .deleteButton");
-        if($deleteButton) {
-            $deleteButton.forEach(button => button.addEventListener("click", () => this.onDelete(button.closest("li").getAttribute('key'))));
-        }
     }
 
     render() {
@@ -41,6 +36,15 @@ export default class ItemList {
             }
         } else {
             this.$itemListWrap.innerHTML = "🎀🎀🎀로딩중🎀🎀🎀";
+        }
+
+        const $deleteButton = document.querySelectorAll("#itemList .deleteButton");
+        if($deleteButton) {
+            $deleteButton.forEach(button => {
+                button.addEventListener("click", () => {
+                    this.onDelete(button.closest("li").getAttribute('key'))
+                })
+            });
         }
     }
 };
