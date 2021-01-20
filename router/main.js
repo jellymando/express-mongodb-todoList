@@ -27,6 +27,19 @@ module.exports = function (app) {
     });
   });
 
+  app.put('/items/:_id', (req, res) => {
+      Item.findById({ _id: req.params._id }, (err, item) => {
+         if(err) return res.status(500).send({error: 'database failure'});
+         if(!item) return res.status(404).json({ error: 'book not found' });
+
+         item.title = req.body.title;
+         item.save((err) => {
+            if(err) res.status(500).json({error: 'failed to update'});
+            res.json({message: 'book updated'});
+         });
+      })
+   });
+
   app.delete('/items/:_id', (req, res) => {
     Item.deleteOne({ _id: req.params._id }, (err, data) => {
       if (err) return res.status(500).send({ error: 'database failure' });

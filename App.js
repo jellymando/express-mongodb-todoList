@@ -51,6 +51,16 @@ export default class App {
           console.log(e);
         }
       },
+      onModify: async (_id, title) => {
+        try {
+          await axios.put(`/items/${_id}`, {
+            title: title,
+          });
+          this.itemList.onFind();
+        } catch (e) {
+          console.log(e);
+        }
+      },
       onDelete: async (_id) => {
         try {
           await axios.delete(`/items/${_id}`);
