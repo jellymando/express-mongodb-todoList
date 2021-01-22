@@ -27,8 +27,8 @@ export default class ItemList {
                 this.$itemListWrap.innerHTML = `<ul id="itemList">` + this.items.map(item => `
                     <li key='${item._id}'>
                         <span class="title">${item.title}</span>
-                        <button type="button" class="modifyButton">수정</button>
-                        <button type="button" class="deleteButton">삭제</button>
+                        <button type="button" class="btn btn-default modifyButton">수정</button>
+                        <button type="button" class="btn btn-danger deleteButton">삭제</button>
                     </li>
                     `
                 ).join("") + "</ul>";
@@ -46,14 +46,16 @@ export default class ItemList {
                 button.addEventListener("click", () => {
                     const parentLi = button.closest("li");
                     const title = parentLi.getElementsByClassName("title")[0];
+                    const titleText = title.innerText;
+                    title.innerText = '';
                     const input = document.createElement("input");
+                    input.className = 'form-control';
                     const saveButton = document.createElement("button");
-                    saveButton.className = 'saveButton';
+                    saveButton.className = 'btn btn-default saveButton';
                     saveButton.innerText = '저장';
-                    input.value = title.innerText;
-                    parentLi.prepend(input);
-                    input.after(saveButton);
-                    title.remove();
+                    input.value = titleText;
+                    title.append(input);
+                    title.after(saveButton);
                     button.remove();
 
                     saveButton.addEventListener("click", () => {

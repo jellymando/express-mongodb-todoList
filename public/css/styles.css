@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+#inputWrap {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#inputWrap > div {
+  display: flex;
+  margin: 0 10px;
+}
+
+#itemList {
+  width: 100%;
+  max-width: 600px;
+}
+
+#itemList li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#itemList li .title {
+  flex: 1 1 auto;
+  font-size: 15px;
+  color: #222;
+}
+
+#itemList li .btn {
+  margin-left: 8px;
+}
